@@ -7,7 +7,7 @@ import Modal from '@/components/ui/Modal';
 import StatusBadge from '@/components/ui/StatusBadge';
 import { getPrintFileDownloadUrl } from '@/services/storageService';
 import type { PrintJob } from '@/types/printJob';
-import { DUPLEX_LABELS, PRINT_MODE_LABELS, formatDateTime, formatFileSize, formatPageSelection } from '@/utils/format';
+import { DUPLEX_LABELS, ORIENTATION_LABELS, PRINT_MODE_LABELS, formatDateTime, formatFileSize, formatPageSelection } from '@/utils/format';
 import { getUserErrorMessage } from '@/utils/errors';
 
 interface JobDetailModalProps {
@@ -36,6 +36,7 @@ export default function JobDetailModal({ job, busy, actionError, onAction, onClo
     ['Page range', formatPageSelection(job.pageSelection)],
     ['Print mode', PRINT_MODE_LABELS[job.printMode]],
     ['Duplex', DUPLEX_LABELS[job.duplex]],
+    ['Orientation', ORIENTATION_LABELS[job.orientation ?? 'PORTRAIT']],
     ['Created', formatDateTime(job.createdAt)],
     ['Approved', formatDateTime(job.approvedAt)],
     ['Printing started', formatDateTime(job.printingAt)],

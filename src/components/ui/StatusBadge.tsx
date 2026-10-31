@@ -3,7 +3,7 @@ import { STATUS_LABELS } from '@/utils/printStatus';
 
 const TONES: Record<PrintStatus, string> = {
   WAITING_APPROVAL: 'bg-warning-100 text-warning-800 ring-warning-600/20',
-  APPROVED: 'bg-secondary-100 text-secondary-800 ring-secondary-600/20',
+  APPROVED: 'bg-primary-100 text-primary-800 ring-primary-600/20',
   REJECTED: 'bg-error-100 text-error-800 ring-error-600/20',
   PRINTING: 'bg-accent-100 text-accent-800 ring-accent-600/20',
   SAVING: 'bg-accent-100 text-accent-800 ring-accent-600/20',

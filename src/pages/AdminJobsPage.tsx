@@ -25,8 +25,8 @@ export default function AdminJobsPage() {
   return (
     <div className="mx-auto max-w-7xl space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-neutral-900 sm:text-3xl">Print jobs</h1>
-        <p className="mt-1 text-sm text-neutral-600">Review, approve and manage every print request.</p>
+        <h1 className="page-heading">Print jobs</h1>
+        <p className="page-subheading">Review, approve and manage every print request.</p>
       </div>
 
       <Card className="space-y-5">
@@ -39,7 +39,7 @@ export default function AdminJobsPage() {
         {actionError && !selected && <Alert>{actionError}</Alert>}
       </Card>
 
-      <Card className="p-0 sm:p-0">
+      <Card className="min-w-0 overflow-hidden p-0 sm:p-0">
         {loading ? (
           <div className="flex justify-center py-16 text-primary-600">
             <Spinner className="h-8 w-8" />

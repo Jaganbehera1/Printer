@@ -26,7 +26,7 @@ export default function RequireAdmin({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100 px-4">
-      <div className="w-full max-w-md space-y-4 rounded-2xl border border-neutral-200 bg-white p-8 text-center shadow-sm">
+      <div className="w-full max-w-md space-y-4 rounded-3xl border border-neutral-200 bg-white p-6 text-center shadow-xl shadow-primary-900/10 sm:p-8">
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-error-50 text-error-700">
           <AlertTriangle className="h-7 w-7" aria-hidden="true" />
         </span>

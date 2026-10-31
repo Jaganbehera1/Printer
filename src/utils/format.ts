@@ -1,4 +1,4 @@
-import type { DuplexMode, PrintMode } from '@/types/printJob';
+import type { DuplexMode, PageOrientation, PrintMode } from '@/types/printJob';
 
 export const PRINT_MODE_LABELS: Record<PrintMode, string> = {
   BLACK_WHITE: 'Black & White',
@@ -8,6 +8,11 @@ export const PRINT_MODE_LABELS: Record<PrintMode, string> = {
 export const DUPLEX_LABELS: Record<DuplexMode, string> = {
   SINGLE: 'Single-sided',
   DOUBLE: 'Double-sided',
+};
+
+export const ORIENTATION_LABELS: Record<PageOrientation, string> = {
+  PORTRAIT: 'Portrait',
+  LANDSCAPE: 'Landscape',
 };
 
 export function formatFileSize(bytes: number): string {

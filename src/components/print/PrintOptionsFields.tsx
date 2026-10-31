@@ -11,7 +11,7 @@ interface PrintOptionsFieldsProps {
 }
 
 const stepButton =
-  'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-neutral-300 bg-white text-neutral-800 transition-colors hover:bg-neutral-50 active:scale-95 disabled:opacity-40';
+  'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-white text-primary-700 shadow-sm transition-all hover:border-primary-300 hover:bg-primary-50 active:scale-95 disabled:opacity-40';
 
 export default function PrintOptionsFields({ values, errors, maxCopies, onChange }: PrintOptionsFieldsProps) {
   const copies = Number(values.copies) || 1;
@@ -85,6 +85,19 @@ export default function PrintOptionsFields({ values, errors, maxCopies, onChange
           options={[
             { value: 'BLACK_WHITE', label: 'Black & White', description: 'Cheaper and faster' },
             { value: 'COLOUR', label: 'Colour', description: 'Full colour pages' },
+          ]}
+        />
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-sm font-medium text-neutral-800">Page orientation</p>
+        <SegmentedControl
+          name="orientation"
+          value={values.orientation}
+          onChange={(orientation) => onChange({ orientation })}
+          options={[
+            { value: 'PORTRAIT', label: 'Portrait', description: 'Vertical page' },
+            { value: 'LANDSCAPE', label: 'Landscape', description: 'Horizontal page' },
           ]}
         />
       </div>

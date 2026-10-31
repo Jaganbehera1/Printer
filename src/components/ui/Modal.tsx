@@ -18,7 +18,7 @@ export default function Modal({ title, onClose, children }: ModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-neutral-900/50 p-0 backdrop-blur-sm sm:items-center sm:p-6"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-primary-900/60 p-0 backdrop-blur-sm sm:items-center sm:p-5 md:p-6"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
@@ -27,10 +27,10 @@ export default function Modal({ title, onClose, children }: ModalProps) {
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="flex max-h-[92vh] w-full flex-col rounded-t-2xl bg-white shadow-xl sm:max-w-3xl sm:rounded-2xl"
+        className="flex max-h-[94dvh] w-full flex-col overflow-hidden rounded-t-3xl border border-neutral-200 bg-white shadow-2xl sm:max-h-[90dvh] sm:max-w-3xl sm:rounded-3xl"
       >
-        <div className="flex items-center justify-between border-b border-neutral-200 px-5 py-4 sm:px-6">
-          <h2 className="text-lg font-semibold text-neutral-900">{title}</h2>
+        <div className="flex shrink-0 items-center justify-between gap-3 border-b border-neutral-200 bg-neutral-50 px-4 py-3.5 sm:px-6 sm:py-4">
+          <h2 className="min-w-0 break-words text-base font-semibold text-neutral-900 sm:text-lg">{title}</h2>
           <button
             type="button"
             onClick={onClose}
@@ -40,7 +40,7 @@ export default function Modal({ title, onClose, children }: ModalProps) {
             <X className="h-5 w-5" />
           </button>
         </div>
-        <div className="overflow-y-auto px-5 py-5 sm:px-6">{children}</div>
+        <div className="overflow-y-auto overscroll-contain px-4 py-4 sm:px-6 sm:py-5">{children}</div>
       </div>
     </div>
   );

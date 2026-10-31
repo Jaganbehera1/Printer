@@ -1,5 +1,5 @@
-import { DUPLEX_LABELS, PRINT_MODE_LABELS, formatFileSize } from '@/utils/format';
-import type { DuplexMode, PrintMode } from '@/types/printJob';
+import { DUPLEX_LABELS, ORIENTATION_LABELS, PRINT_MODE_LABELS, formatFileSize } from '@/utils/format';
+import type { DuplexMode, PageOrientation, PrintMode } from '@/types/printJob';
 
 interface PrintSummaryProps {
   fileName: string | null;
@@ -8,9 +8,10 @@ interface PrintSummaryProps {
   copies: number;
   printMode: PrintMode;
   duplex: DuplexMode;
+  orientation: PageOrientation;
 }
 
-export default function PrintSummary({ fileName, fileSize, pagesLabel, copies, printMode, duplex }: PrintSummaryProps) {
+export default function PrintSummary({ fileName, fileSize, pagesLabel, copies, printMode, duplex, orientation }: PrintSummaryProps) {
   const rows: [string, string][] = [
     ['Document', fileName ?? 'No file selected'],
     ['File size', fileSize === null ? '-' : formatFileSize(fileSize)],
@@ -18,6 +19,7 @@ export default function PrintSummary({ fileName, fileSize, pagesLabel, copies, p
     ['Copies', String(copies)],
     ['Mode', PRINT_MODE_LABELS[printMode]],
     ['Sides', DUPLEX_LABELS[duplex]],
+    ['Orientation', ORIENTATION_LABELS[orientation]],
   ];
 
   return (

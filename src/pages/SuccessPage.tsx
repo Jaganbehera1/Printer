@@ -29,7 +29,7 @@ export default function SuccessPage() {
   };
 
   return (
-    <section className="mx-auto max-w-xl px-4 py-8 sm:px-6 sm:py-14">
+    <section className="mx-auto w-full max-w-xl px-4 py-7 sm:px-6 sm:py-12">
       {loading ? (
         <div className="flex justify-center py-16 text-primary-600">
           <Spinner className="h-8 w-8" />
@@ -41,7 +41,7 @@ export default function SuccessPage() {
       ) : (
         <div className="space-y-6">
           <div className="text-center">
-            <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-success-100 text-success-700">
+            <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-success-100 text-success-700 shadow-sm shadow-success-900/10 ring-1 ring-success-200">
               <CheckCircle2 className="h-8 w-8" aria-hidden="true" />
             </span>
             <h1 className="mt-5 text-2xl font-semibold tracking-tight text-neutral-900 sm:text-3xl">Request submitted</h1>
@@ -51,12 +51,12 @@ export default function SuccessPage() {
           <Card>
             <p className="text-xs font-medium uppercase tracking-wide text-neutral-500">Print job ID</p>
             <div className="mt-2 flex items-center justify-between gap-3">
-              <p className="break-all font-mono text-xl font-semibold text-neutral-900 sm:text-2xl">{job.jobId}</p>
+              <p className="min-w-0 break-all font-mono text-lg font-bold text-primary-900 sm:text-2xl">{job.jobId}</p>
               <button
                 type="button"
                 onClick={copyId}
                 aria-label="Copy job ID"
-                className="flex h-11 shrink-0 items-center gap-2 rounded-xl border border-neutral-300 px-3 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-50"
+                className="flex min-h-11 shrink-0 items-center gap-2 rounded-xl border border-neutral-300 bg-white px-3 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-50"
               >
                 {copied ? <Check className="h-4 w-4 text-success-700" /> : <Copy className="h-4 w-4" />}
                 {copied ? 'Copied' : 'Copy'}

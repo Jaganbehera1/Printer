@@ -20,6 +20,7 @@
         "pageSelection": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 200" },
         "printMode": { ".validate": "newData.val() == 'BLACK_WHITE' || newData.val() == 'COLOUR'" },
         "duplex": { ".validate": "newData.val() == 'SINGLE' || newData.val() == 'DOUBLE'" },
+        "orientation": { ".validate": "newData.val() == 'PORTRAIT' || newData.val() == 'LANDSCAPE'" },
         "status": {
           ".validate": "(newData.val() == 'WAITING_APPROVAL' || newData.val() == 'APPROVED' || newData.val() == 'REJECTED' || newData.val() == 'PRINTING' || newData.val() == 'SAVING' || newData.val() == 'PRINTED' || newData.val() == 'SAVED' || newData.val() == 'FAILED' || newData.val() == 'CANCELLED') && (data.exists() || newData.val() == 'WAITING_APPROVAL' || newData.val() == 'APPROVED')"
         },

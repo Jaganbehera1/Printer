@@ -1,6 +1,6 @@
-# School Smart Print System
+# Jagan Web Solutions Print Platform
 
-Students and teachers scan a QR code, open the print portal on their phone, upload a file (PDF, Word, Excel, PowerPoint, text or image), choose their print options, and submit. By default the request is sent straight to the printer. Administrators can switch on approval in Settings, and can then review, approve, reject, cancel or retry requests. The web app never talks to the printer. A small Python program called the print agent, running on the computer connected to the printer, collects approved requests and prints them. See `print-agent/README.md`.
+Users scan a QR code, open the print portal on their phone, upload a file (PDF, Word, Excel, PowerPoint, text or image), choose their print options (including portrait or landscape page orientation), and submit. By default the request is sent straight to the printer. Administrators can switch on approval in Settings, and can then review, approve, reject, cancel or retry requests. The web app never talks to the printer. A small Python program called the print agent, running on the computer connected to the printer, collects approved requests and prints them. See `print-agent/README.md`.
 
 ## 1. Create the Firebase project
 
@@ -80,7 +80,7 @@ The database deployment adds the `createdAt` index used by cleanup. If a file ca
 ```
 adminUsers
   PASTE_UID_HERE
-    email: "admin@yourschool.edu"
+    email: "admin@example.com"
     role: "admin"
 ```
 
@@ -95,7 +95,7 @@ node -e "require('firebase-admin').initializeApp({credential: require('firebase-
 
 The administrator must sign out and sign in again for the claim to apply.
 
-5. Set the school name, upload limits and defaults in *Settings*. The first save creates the `settings` record. Until then, sensible defaults are used.
+5. Set the service name, upload limits and defaults in *Settings*. The first save creates the `settings` record. Until then, sensible defaults are used.
 
 ## 7. Run locally
 

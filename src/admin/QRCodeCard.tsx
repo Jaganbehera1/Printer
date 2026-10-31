@@ -6,10 +6,10 @@ import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 
 interface QRCodeCardProps {
-  schoolName: string;
+  brandName: string;
 }
 
-export default function QRCodeCard({ schoolName }: QRCodeCardProps) {
+export default function QRCodeCard({ brandName }: QRCodeCardProps) {
   const printUrl = `${window.location.origin}/print`;
   const [preview, setPreview] = useState<string | null>(null);
   const [previewError, setPreviewError] = useState(false);
@@ -37,7 +37,7 @@ export default function QRCodeCard({ schoolName }: QRCodeCardProps) {
       const url = await QRCode.toDataURL(printUrl, { width: 1200, margin: 4, errorCorrectionLevel: 'H' });
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'school-print-qr-code.png';
+      link.download = 'print-service-qr-code.png';
       link.click();
     } catch {
       setDownloadError('The QR code could not be created. Please try again.');
@@ -54,16 +54,16 @@ export default function QRCodeCard({ schoolName }: QRCodeCardProps) {
         </span>
         <div>
           <h2 className="text-base font-semibold text-neutral-900">Printer QR code</h2>
-          <p className="text-sm text-neutral-500">Students scan this to open the print page.</p>
+          <p className="text-sm text-neutral-500">Scan this code to open the print page.</p>
         </div>
       </div>
 
-      <div className="flex flex-col items-center rounded-2xl border border-neutral-200 bg-white p-6 text-center">
-        <p className="text-xs font-medium uppercase tracking-widest text-neutral-500">{schoolName}</p>
+      <div className="flex min-w-0 flex-col items-center rounded-2xl border border-neutral-200 bg-neutral-50 p-4 text-center sm:p-6">
+        <p className="text-xs font-medium uppercase tracking-widest text-neutral-500">{brandName}</p>
         <p className="mt-1 text-lg font-semibold text-neutral-900">Scan to print</p>
-        <div className="mt-4 flex h-[280px] w-[280px] items-center justify-center">
+        <div className="mt-4 flex aspect-square w-full max-w-[280px] items-center justify-center rounded-xl bg-white p-2">
           {preview ? (
-            <img src={preview} alt={`QR code linking to ${printUrl}`} className="h-[280px] w-[280px]" />
+            <img src={preview} alt={`QR code linking to ${printUrl}`} className="h-full w-full object-contain" />
           ) : previewError ? (
             <p className="text-sm text-error-700">The QR code preview is unavailable.</p>
           ) : (

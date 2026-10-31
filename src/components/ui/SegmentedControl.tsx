@@ -19,10 +19,10 @@ export default function SegmentedControl<T extends string>({ name, options, valu
         return (
           <label
             key={option.value}
-            className={`flex cursor-pointer flex-col justify-center rounded-xl border-2 px-4 py-3 transition-all duration-150 active:scale-[0.99] ${
+            className={`flex min-h-[3.75rem] cursor-pointer flex-col justify-center rounded-xl border-2 px-4 py-3 transition-all duration-150 active:scale-[0.99] ${
               active
-                ? 'border-primary-500 bg-primary-50 text-primary-900'
-                : 'border-neutral-200 bg-white text-neutral-800 hover:border-neutral-300'
+                ? 'border-accent-500 bg-accent-50 text-primary-900 shadow-sm shadow-accent-500/10'
+                : 'border-neutral-200 bg-white text-neutral-800 hover:border-primary-300 hover:bg-primary-50/50'
             }`}
           >
             <input
@@ -35,7 +35,7 @@ export default function SegmentedControl<T extends string>({ name, options, valu
             />
             <span className="text-sm font-medium">{option.label}</span>
             {option.description && (
-              <span className={`mt-0.5 text-xs ${active ? 'text-primary-700' : 'text-neutral-500'}`}>
+              <span className={`mt-0.5 text-xs leading-5 ${active ? 'text-primary-700' : 'text-neutral-500'}`}>
                 {option.description}
               </span>
             )}

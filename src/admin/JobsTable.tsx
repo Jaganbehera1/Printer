@@ -36,9 +36,9 @@ export default function JobsTable({ jobs, busyJobId, onView, onAction }: JobsTab
   }
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-neutral-200 text-left text-sm">
-        <thead className="bg-neutral-50 text-xs font-semibold uppercase tracking-wide text-neutral-500">
+    <div className="max-w-full overflow-x-auto overscroll-x-contain rounded-b-2xl" role="region" aria-label="Print jobs table" tabIndex={0}>
+      <table className="min-w-[760px] divide-y divide-neutral-200 text-left text-sm">
+        <thead className="bg-neutral-50 text-xs font-semibold uppercase tracking-wide text-neutral-600">
           <tr>
             <th className="px-4 py-3">Job ID</th>
             <th className="px-4 py-3">File</th>
@@ -54,7 +54,7 @@ export default function JobsTable({ jobs, busyJobId, onView, onAction }: JobsTab
             const busy = busyJobId === job.jobId;
             return (
               <tr key={job.jobId} className="transition-colors hover:bg-neutral-50">
-                <td className="whitespace-nowrap px-4 py-3 font-mono text-xs font-medium text-neutral-900">{job.jobId}</td>
+                <td className="whitespace-nowrap px-4 py-3 font-mono text-xs font-semibold text-primary-800">{job.jobId}</td>
                 <td className="max-w-[180px] truncate px-4 py-3 text-neutral-700" title={job.fileName}>
                   {job.fileName}
                 </td>

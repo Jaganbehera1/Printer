@@ -33,8 +33,8 @@ export default function AdminDashboardPage() {
   return (
     <div className="mx-auto max-w-7xl space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-neutral-900 sm:text-3xl">Dashboard</h1>
-        <p className="mt-1 text-sm text-neutral-600">An overview of print requests across the school.</p>
+        <h1 className="page-heading">Dashboard</h1>
+        <p className="page-subheading">An overview of all print requests.</p>
       </div>
 
       {loading ? (
@@ -48,7 +48,7 @@ export default function AdminDashboardPage() {
           <StatsGrid stats={stats} />
 
           <Card className="p-0 sm:p-0">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-200 px-5 py-4 sm:px-6">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-200 bg-neutral-50/70 px-4 py-4 sm:px-6">
               <div>
                 <h2 className="text-base font-semibold text-neutral-900">Recent print jobs</h2>
                 <p className="text-sm text-neutral-500">The {RECENT_LIMIT} newest requests</p>

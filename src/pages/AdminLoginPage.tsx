@@ -1,4 +1,4 @@
-import { AlertTriangle, LogIn } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 import { Navigate } from 'react-router-dom';
 import Alert from '@/components/ui/Alert';
@@ -8,6 +8,7 @@ import FormField, { TextInput } from '@/components/ui/FormField';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 import { signInAdmin, signOutAdmin } from '@/services/authService';
 import { getUserErrorMessage } from '@/utils/errors';
+import { BRAND_NAME, BRAND_WEBSITE } from '@/utils/constants';
 
 export default function AdminLoginPage() {
   const auth = useAdminAuth();
@@ -42,14 +43,19 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-100 px-4 py-10">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-neutral-50 px-4 py-8">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700" />
+      <div className="pointer-events-none absolute -right-24 top-12 h-64 w-64 rounded-full bg-accent-300/20 blur-3xl" />
       <div className="w-full max-w-md">
-        <div className="mb-8 text-center">
-          <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-600 text-white shadow-sm">
-            <LogIn className="h-6 w-6" aria-hidden="true" />
+        <div className="relative mb-6 text-center sm:mb-8">
+          <span className="mx-auto flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-primary-900 shadow-lg shadow-primary-700/20 ring-1 ring-neutral-200">
+            <img src="/images/jagan-logo.jpg" alt={`${BRAND_NAME} logo`} className="h-full w-full object-cover" />
           </span>
-          <h1 className="mt-5 text-2xl font-semibold tracking-tight text-neutral-900">Administrator sign in</h1>
-          <p className="mt-2 text-sm text-neutral-600">School Smart Print System</p>
+          <h1 className="mt-5 text-2xl font-bold tracking-tight text-white sm:text-primary-900">Administrator sign in</h1>
+          <p className="mt-1 text-sm font-semibold text-accent-200 sm:text-primary-700">{BRAND_NAME}</p>
+          <a href={BRAND_WEBSITE} target="_blank" rel="noreferrer" className="mt-2 inline-block text-sm text-primary-100 hover:text-white sm:text-neutral-600 sm:hover:text-primary-700">
+            jaganwebsolutions.netlify.app
+          </a>
         </div>
 
         <Card>
@@ -97,9 +103,9 @@ export default function AdminLoginPage() {
           </form>
         </Card>
 
-        <p className="mt-6 flex items-center justify-center gap-2 text-xs text-neutral-500">
+        <p className="mt-5 flex items-start justify-center gap-2 text-center text-xs leading-5 text-neutral-500 sm:mt-6">
           <AlertTriangle className="h-3.5 w-3.5" aria-hidden="true" />
-          Administrator accounts are created by the school IT team.
+          Administrator access is managed by the service owner.
         </p>
       </div>
     </div>

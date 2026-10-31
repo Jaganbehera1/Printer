@@ -19,7 +19,7 @@ interface StatCard {
 }
 
 const CARDS: StatCard[] = [
-  { key: 'total', label: 'Total jobs', icon: ListChecks, tone: 'bg-neutral-100 text-neutral-700' },
+  { key: 'total', label: 'Total jobs', icon: ListChecks, tone: 'bg-primary-50 text-primary-800' },
   { key: 'WAITING_APPROVAL', label: 'Waiting for approval', icon: Hourglass, tone: 'bg-warning-100 text-warning-800' },
   { key: 'APPROVED', label: 'Approved', icon: CheckCircle2, tone: 'bg-secondary-100 text-secondary-800' },
   { key: 'PRINTING', label: 'Printing', icon: Printer, tone: 'bg-accent-100 text-accent-800' },
@@ -35,10 +35,10 @@ export default function StatsGrid({ stats }: { stats: JobStats }) {
   return (
     <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
       {CARDS.map(({ key, label, icon: Icon, tone }) => (
-        <div key={key} className="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm sm:p-5">
+        <div key={key} className="min-w-0 rounded-2xl border border-neutral-200/80 bg-white p-4 shadow-[0_8px_24px_-18px_rgba(11,31,58,0.3)] transition-transform duration-200 hover:-translate-y-0.5 sm:p-5">
           <div className="flex items-center justify-between gap-3">
-            <p className="text-sm font-medium text-neutral-600">{label}</p>
-            <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${tone}`}>
+            <p className="min-w-0 text-xs font-semibold leading-5 text-neutral-600 sm:text-sm">{label}</p>
+            <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${tone}`}>
               <Icon className="h-4 w-4" aria-hidden="true" />
             </span>
           </div>

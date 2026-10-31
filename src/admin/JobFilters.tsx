@@ -35,10 +35,10 @@ export default function JobFiltersBar({ filters, onChange }: JobFiltersBarProps)
               type="button"
               aria-pressed={active}
               onClick={() => onChange({ status })}
-              className={`h-9 rounded-full px-3.5 text-xs font-medium transition-colors ${
+              className={`min-h-10 rounded-full px-3.5 text-xs font-semibold transition-colors ${
                 active
-                  ? 'bg-neutral-900 text-white'
-                  : 'bg-white text-neutral-700 ring-1 ring-inset ring-neutral-300 hover:bg-neutral-50'
+                  ? 'bg-primary-900 text-white shadow-sm'
+                  : 'bg-white text-neutral-700 ring-1 ring-inset ring-neutral-300 hover:bg-primary-50'
               }`}
             >
               {status === 'ALL' ? 'All statuses' : STATUS_LABELS[status]}
@@ -47,13 +47,13 @@ export default function JobFiltersBar({ filters, onChange }: JobFiltersBarProps)
         })}
       </div>
 
-      <div className="grid gap-3 md:grid-cols-[1fr_180px_180px]">
+      <div className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_180px_180px]">
         <label className="relative block">
           <span className="sr-only">Search jobs</span>
           <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" aria-hidden="true" />
           <input
             type="search"
-            placeholder="Search by job ID, name, roll, class or file"
+            placeholder="Search by request ID or file name"
             value={filters.search}
             onChange={(event) => onChange({ search: event.target.value })}
             className={`${inputClassName} pl-10`}

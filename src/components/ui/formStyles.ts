@@ -1,2 +1,2 @@
 export const inputClassName =
-  'block h-12 w-full rounded-xl border border-neutral-300 bg-white px-4 text-base text-neutral-900 placeholder:text-neutral-400 outline-none transition-colors focus:border-primary-500 focus:ring-4 focus:ring-primary-100 aria-[invalid=true]:border-error-500 aria-[invalid=true]:focus:ring-error-100';
+  'block min-h-12 w-full min-w-0 rounded-xl border border-neutral-200 bg-white px-4 text-base text-neutral-900 shadow-sm placeholder:text-neutral-400 outline-none transition-[border-color,box-shadow,background-color] duration-150 focus:border-primary-500 focus:bg-white focus:ring-4 focus:ring-primary-100 aria-[invalid=true]:border-error-500 aria-[invalid=true]:focus:ring-error-100';

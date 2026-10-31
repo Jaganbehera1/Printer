@@ -1,3 +1,131 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --color-navy: #0b1f3a;
+  --color-deep-navy: #142b4f;
+  --color-gold: #f4b942;
+  --color-bright-gold: #ffd166;
+  --color-red: #e63946;
+  --color-silver: #c0c0c0;
+  --color-light-silver: #f1f3f5;
+  --color-green: #198754;
+  --color-emerald: #20a875;
+  --color-white: #ffffff;
+  --color-background: #f5f7fb;
+}
+
+@layer base {
+  html {
+    min-width: 320px;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    @apply min-h-screen bg-neutral-50 text-neutral-900 antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  button,
+  a,
+  input,
+  select {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    background: var(--color-bright-gold);
+    color: var(--color-navy);
+  }
+
+  :focus-visible {
+    outline: 3px solid rgb(244 185 66 / 75%);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .page-heading {
+    @apply text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl;
+  }
+
+  .page-subheading {
+    @apply mt-1 text-sm leading-6 text-neutral-600 sm:text-base;
+  }
+}
+
+.home-hero {
+  background:
+    radial-gradient(ellipse at 78% 12%, rgb(255 209 102 / 22%), transparent 28%),
+    radial-gradient(ellipse at 8% 84%, rgb(230 57 70 / 16%), transparent 30%),
+    radial-gradient(ellipse at 92% 88%, rgb(32 168 117 / 14%), transparent 28%),
+    linear-gradient(125deg, var(--color-navy) 0%, var(--color-deep-navy) 62%, #17486a 100%);
+}
+
+.hero-grid {
+  background-image: radial-gradient(rgb(255 255 255 / 28%) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(to left, black, transparent 95%);
+}
+
+.brand-stripe {
+  background: linear-gradient(90deg, var(--color-red), var(--color-gold) 36%, var(--color-bright-gold) 54%, var(--color-emerald));
+}
+
+.page-enter {
+  animation: page-enter 260ms ease-out both;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 700px) and (max-width: 1023px) {
+  .home-hero-content {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 1.5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .home-hero-content > div:first-child h1 {
+    font-size: clamp(2rem, 4.2vw, 3rem);
+  }
+
+  .home-hero-content > div:first-child > span:first-child {
+    font-size: 0.625rem;
+  }
+
+  .home-hero-art > div:last-child {
+    height: 21rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

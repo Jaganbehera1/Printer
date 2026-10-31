@@ -19,7 +19,7 @@ type Errors = Partial<Record<'schoolName' | 'maxFileSize' | 'maxCopies', string>
 function validate(draft: PrintSettings): Errors {
   const errors: Errors = {};
   const name = draft.schoolName.trim();
-  if (name.length < 2 || name.length > 80) errors.schoolName = 'School name must be between 2 and 80 characters.';
+  if (name.length < 2 || name.length > 80) errors.schoolName = 'Name must be between 2 and 80 characters.';
   if (!Number.isInteger(draft.maxFileSize) || draft.maxFileSize < 1 || draft.maxFileSize > HARD_MAX_FILE_MB) {
     errors.maxFileSize = `Enter a whole number of MB from 1 to ${HARD_MAX_FILE_MB}.`;
   }
@@ -47,7 +47,7 @@ export default function SettingsForm({ initial }: SettingsFormProps) {
     setSaving(true);
     try {
       await saveSettings({ ...draft, schoolName: draft.schoolName.trim() });
-      setMessage({ tone: 'success', text: 'Settings saved. Students will see the new options right away.' });
+      setMessage({ tone: 'success', text: 'Settings saved. Users will see the new options right away.' });
     } catch (error) {
       setMessage({ tone: 'error', text: getUserErrorMessage(error) });
     } finally {
@@ -59,8 +59,8 @@ export default function SettingsForm({ initial }: SettingsFormProps) {
     <Card>
       <form onSubmit={handleSubmit} noValidate className="space-y-7">
         <div className="space-y-5">
-          <h2 className="text-base font-semibold text-neutral-900">School details</h2>
-          <FormField label="School name" htmlFor="schoolName" error={errors.schoolName}>
+          <h2 className="text-base font-bold text-primary-900">Service details</h2>
+          <FormField label="Service name" htmlFor="schoolName" error={errors.schoolName}>
             <TextInput
               id="schoolName"
               value={draft.schoolName}
@@ -71,7 +71,7 @@ export default function SettingsForm({ initial }: SettingsFormProps) {
         </div>
 
         <div className="space-y-5 border-t border-neutral-200 pt-6">
-          <h2 className="text-base font-semibold text-neutral-900">Upload and copy limits</h2>
+          <h2 className="text-base font-bold text-primary-900">Upload and copy limits</h2>
           <div className="grid gap-5 sm:grid-cols-2">
             <FormField label="Maximum file size (MB)" htmlFor="maxFileSize" error={errors.maxFileSize}>
               <TextInput
@@ -104,7 +104,7 @@ export default function SettingsForm({ initial }: SettingsFormProps) {
         </div>
 
         <div className="space-y-5 border-t border-neutral-200 pt-6">
-          <h2 className="text-base font-semibold text-neutral-900">Approval and defaults</h2>
+          <h2 className="text-base font-bold text-primary-900">Approval and defaults</h2>
           <div className="flex items-center justify-between gap-4 rounded-xl bg-neutral-50 px-4 py-3">
             <div>
               <p className="text-sm font-medium text-neutral-900">Require admin approval</p>
@@ -119,7 +119,7 @@ export default function SettingsForm({ initial }: SettingsFormProps) {
               aria-label="Require admin approval"
               onClick={() => update({ printApprovalRequired: !draft.printApprovalRequired })}
               className={`relative h-7 w-12 shrink-0 rounded-full transition-colors ${
-                draft.printApprovalRequired ? 'bg-primary-600' : 'bg-neutral-300'
+                draft.printApprovalRequired ? 'bg-success-600' : 'bg-neutral-300'
               }`}
             >
               <span

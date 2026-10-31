@@ -1,4 +1,4 @@
-import type { DuplexMode, PrintMode } from '@/types/printJob';
+import type { DuplexMode, PageOrientation, PrintMode } from '@/types/printJob';
 import type { PrintSettings } from '@/types/printSettings';
 import { resolvePageSelection } from '@/utils/pageRange';
 
@@ -8,6 +8,7 @@ export interface PrintFormValues {
   pageRange: string;
   printMode: PrintMode;
   duplex: DuplexMode;
+  orientation: PageOrientation;
 }
 
 export type PrintFormErrors = Partial<Record<keyof PrintFormValues | 'file', string>>;

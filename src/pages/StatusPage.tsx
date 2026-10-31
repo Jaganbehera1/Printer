@@ -5,15 +5,15 @@ import Card from '@/components/ui/Card';
 import Spinner from '@/components/ui/Spinner';
 import JobStatusPanel from '@/components/print/JobStatusPanel';
 import { usePrintJob } from '@/hooks/usePrintJobs';
-import { formatDateTime, formatFileSize, DUPLEX_LABELS, PRINT_MODE_LABELS, formatPageSelection } from '@/utils/format';
+import { formatDateTime, formatFileSize, DUPLEX_LABELS, ORIENTATION_LABELS, PRINT_MODE_LABELS, formatPageSelection } from '@/utils/format';
 
 export default function StatusPage() {
   const { jobId = '' } = useParams();
   const { data: job, loading, error } = usePrintJob(jobId);
 
   return (
-    <section className="mx-auto max-w-xl px-4 py-6 sm:px-6 sm:py-10">
-      <Link to="/" className="inline-flex h-10 items-center gap-2 text-sm font-medium text-neutral-600 hover:text-neutral-900">
+    <section className="mx-auto w-full max-w-xl px-4 py-6 sm:px-6 sm:py-10">
+      <Link to="/" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-neutral-600 hover:text-primary-800">
         <ArrowLeft className="h-4 w-4" aria-hidden="true" />
         Back to home
       </Link>
@@ -39,7 +39,7 @@ export default function StatusPage() {
           <>
             <div>
               <p className="text-xs font-medium uppercase tracking-wide text-neutral-500">Print job ID</p>
-              <h1 className="mt-1 break-all font-mono text-xl font-semibold text-neutral-900 sm:text-2xl">{job.jobId}</h1>
+              <h1 className="mt-1 break-all font-mono text-xl font-bold text-primary-900 sm:text-2xl">{job.jobId}</h1>
             </div>
 
             <Card>
@@ -47,7 +47,7 @@ export default function StatusPage() {
             </Card>
 
             <Card>
-              <h2 className="text-base font-semibold text-neutral-900">Request details</h2>
+              <h2 className="text-base font-bold text-primary-900">Request details</h2>
               <dl className="mt-4 divide-y divide-neutral-100">
                 {[
                   ['Document', job.fileName],
@@ -56,6 +56,7 @@ export default function StatusPage() {
                   ['Copies', String(job.copies)],
                   ['Mode', PRINT_MODE_LABELS[job.printMode]],
                   ['Sides', DUPLEX_LABELS[job.duplex]],
+                  ['Orientation', ORIENTATION_LABELS[job.orientation ?? 'PORTRAIT']],
                   ['Submitted', formatDateTime(job.createdAt)],
                   [
                     'Last update',

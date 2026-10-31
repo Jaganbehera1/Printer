@@ -1,4 +1,5 @@
 import { useRef, useState, type FormEvent } from 'react';
+import { ClipboardCheck, FileUp, SlidersHorizontal } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Alert from '@/components/ui/Alert';
 import Button from '@/components/ui/Button';
@@ -27,6 +28,7 @@ export default function PrintRequestForm({ settings }: PrintRequestFormProps) {
     pageRange: '',
     printMode: settings.defaultPrintMode,
     duplex: settings.defaultDuplex,
+    orientation: 'PORTRAIT',
   }));
   const [file, setFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<PrintFormErrors>({});
@@ -80,6 +82,7 @@ export default function PrintRequestForm({ settings }: PrintRequestFormProps) {
         pageSelection: pages.value,
         printMode: values.printMode,
         duplex: values.duplex,
+        orientation: values.orientation,
       };
       await createPrintJob(job, settings.printApprovalRequired ? 'WAITING_APPROVAL' : 'APPROVED');
       navigate(`/success/${jobId}`);
@@ -99,9 +102,9 @@ export default function PrintRequestForm({ settings }: PrintRequestFormProps) {
     : 'Submit print request';
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-6">
-      <Card>
-        <StepTitle number={1} title="Your file" />
+    <form onSubmit={handleSubmit} noValidate className="min-w-0 space-y-4 sm:space-y-6">
+      <Card className="border-primary-100/80">
+        <StepTitle number={1} title="Your file" Icon={FileUp} />
         <div className="mt-5">
           <FileUploadField
             file={file}
@@ -113,8 +116,8 @@ export default function PrintRequestForm({ settings }: PrintRequestFormProps) {
         </div>
       </Card>
 
-      <Card>
-        <StepTitle number={2} title="Print options" />
+      <Card className="border-secondary-100/80">
+        <StepTitle number={2} title="Print options" Icon={SlidersHorizontal} />
         <div className="mt-5">
           <PrintOptionsFields
             values={values}
@@ -125,8 +128,8 @@ export default function PrintRequestForm({ settings }: PrintRequestFormProps) {
         </div>
       </Card>
 
-      <Card>
-        <StepTitle number={3} title="Summary" />
+      <Card className="border-accent-100/80">
+        <StepTitle number={3} title="Summary" Icon={ClipboardCheck} />
         <div className="mt-5">
           <PrintSummary
             fileName={file?.name ?? null}
@@ -135,13 +138,14 @@ export default function PrintRequestForm({ settings }: PrintRequestFormProps) {
             copies={Number(values.copies) || 0}
             printMode={values.printMode}
             duplex={values.duplex}
+            orientation={values.orientation}
           />
         </div>
       </Card>
 
       {submitError && <Alert>{submitError}</Alert>}
 
-      <div className="sticky bottom-0 -mx-4 border-t border-neutral-200 bg-white/95 px-4 py-4 backdrop-blur sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:p-0">
+      <div className="sticky bottom-0 z-10 -mx-4 border-t border-neutral-200 bg-white/95 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:p-0">
         <Button type="submit" size="lg" fullWidth loading={submitting} className="uppercase tracking-wide">
           {buttonLabel}
         </Button>
@@ -150,13 +154,22 @@ export default function PrintRequestForm({ settings }: PrintRequestFormProps) {
   );
 }
 
-function StepTitle({ number, title }: { number: number; title: string }) {
+function StepTitle({ number, title, Icon }: { number: number; title: string; Icon: typeof FileUp }) {
+  const tones = [
+    'from-primary-500 to-primary-700 shadow-primary-600/20',
+    'from-secondary-500 to-secondary-700 shadow-secondary-600/20',
+    'from-accent-400 to-accent-600 shadow-accent-600/20',
+  ];
+
   return (
     <div className="flex items-center gap-3">
-      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-600 text-sm font-semibold text-white">
-        {number}
+      <span className={`flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br text-white shadow-md ${tones[number - 1]}`}>
+        <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
-      <h2 className="text-base font-semibold text-neutral-900">{title}</h2>
+      <span>
+        <span className="block text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-400">Step {number}</span>
+        <h2 className="mt-0.5 text-base font-bold text-neutral-900">{title}</h2>
+      </span>
     </div>
   );
 }

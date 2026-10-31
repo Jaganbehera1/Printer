@@ -71,19 +71,19 @@ export default function FileUploadField({ file, onChange, error, maxFileSizeMb, 
         }}
         onDragLeave={() => setDragging(false)}
         onDrop={handleDrop}
-        className={`flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed px-6 py-10 text-center transition-colors ${
+        className={`flex min-h-52 cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed px-4 py-8 text-center transition-all duration-200 sm:rounded-3xl sm:px-6 sm:py-12 ${
           dragging
             ? 'border-primary-500 bg-primary-50'
             : error
               ? 'border-error-300 bg-error-50/50'
-              : 'border-neutral-300 bg-white hover:border-primary-400 hover:bg-primary-50/40'
+              : 'border-primary-200 bg-gradient-to-br from-primary-50/70 via-white to-accent-50/60 hover:-translate-y-0.5 hover:border-accent-400 hover:shadow-lg hover:shadow-primary-900/5'
         } ${disabled ? 'pointer-events-none opacity-60' : ''}`}
       >
-        <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-50 text-primary-700">
+        <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-100 to-secondary-100 text-primary-700 shadow-sm">
           {disabled ? <Spinner className="text-primary-700" /> : <Upload className="h-6 w-6" aria-hidden="true" />}
         </span>
         <span>
-          <span className="block text-base font-medium text-neutral-900">Tap to choose a file</span>
+          <span className="block text-base font-bold text-neutral-900">Tap to choose a file</span>
           <span className="mt-1 block text-sm text-neutral-500">
             PDF, Word, Excel, PowerPoint, text or image, up to {maxFileSizeMb} MB
           </span>
