@@ -49,7 +49,29 @@ firebase deploy --only database
 - `database.rules.json` controls the Realtime Database. Anyone can create a print request with valid fields. Anyone can read a single request by its ID (needed for the status page). Only administrators can list all requests, change requests, and change settings.
 - `storage.rules` applies only to any pre-existing files in Firebase Storage. New files are uploaded to Cloudinary.
 
-## 5. Create the first administrator
+## 5. Automatically delete old print requests
+
+The scheduled Firebase Function deletes each print file and its Realtime Database record once the request is at least 10 days old. It runs hourly, so deletion happens within about an hour after the 10-day mark. Legacy files stored in Firebase Storage are also deleted. The function only removes files whose stored path matches that request's expected file path.
+
+Scheduled functions require the Firebase project to use the **Blaze** (pay-as-you-go) plan, and Cloud Scheduler may incur charges. Set the Cloudinary credentials as Firebase secrets; do not add them to the web app's `.env`:
+
+```
+firebase functions:secrets:set CLOUDINARY_CLOUD_NAME
+firebase functions:secrets:set CLOUDINARY_API_KEY
+firebase functions:secrets:set CLOUDINARY_API_SECRET
+```
+
+From the project folder, build and deploy the function:
+
+```
+npm --prefix functions install
+npm --prefix functions run build
+firebase deploy --only functions,database
+```
+
+The database deployment adds the `createdAt` index used by cleanup. If a file cannot be deleted, its Firebase record is retained and the function logs the error; a later run will retry it.
+
+## 6. Create the first administrator
 
 1. In *Authentication > Users*, click **Add user**, enter the administrator's email and a strong password.
 2. Copy the new user's **User UID**.
@@ -75,7 +97,7 @@ The administrator must sign out and sign in again for the claim to apply.
 
 5. Set the school name, upload limits and defaults in *Settings*. The first save creates the `settings` record. Until then, sensible defaults are used.
 
-## 6. Run locally
+## 7. Run locally
 
 ```
 npm install
@@ -84,7 +106,7 @@ npm run dev
 
 Open the address printed in the terminal. Admin sign-in is at `/admin/login`.
 
-## 7. Build
+## 8. Build
 
 ```
 npm run build
@@ -92,7 +114,7 @@ npm run build
 
 The production files are written to `dist/`.
 
-## 8. Deploy
+## 9. Deploy
 
 ### Option A: Firebase Hosting (same project as the database)
 
@@ -109,17 +131,17 @@ Build command: `npm run build`. Publish directory: `dist`. Add all `VITE_FIREBAS
 
 After deploying, add your site's domain under *Authentication > Settings > Authorized domains* in Firebase.
 
-## 9. QR code
+## 10. QR code
 
 Sign in as an administrator, open **Settings**, and click **Download QR Code**. The code points to `https://your-domain/print` using the domain you are currently viewing, so it updates automatically after deployment. The PNG is 1200 px wide, suitable for printing at A4 or A5 and placing next to the printer.
 
-## 10. Using the system
+## 11. Using the system
 
-**Students and teachers**: scan the QR code, enter name, class, section and roll number, upload a file, choose copies, pages (for example `1-5`, `2,4,6` or `1-3,7,9`), colour mode and sides, then submit. Word, Excel and PowerPoint files are converted to PDF by the print agent before printing, so the printer computer needs LibreOffice installed. Keep the job ID from the confirmation page to check the status later at `/status/PR-...`.
+**Students and teachers**: scan the QR code, upload a file, choose copies, pages (for example `1-5`, `2,4,6` or `1-3,7,9`), colour mode and sides, then submit. No personal details are required. Word, Excel and PowerPoint files are converted to PDF by the print agent before printing, so the printer computer needs LibreOffice installed. Keep the job ID from the confirmation page to check the status later at `/status/PR-...`.
 
 **Administrators**: open the dashboard or **Print Jobs**. Use the status pills, search, date range and sort to find requests. Use the icon buttons in each row or the **View** button to open a job, download its PDF, and approve, reject, cancel or retry it.
 
-## 11. Print agent (printer computer)
+## 12. Print agent (printer computer)
 
 The print agent lives in `print-agent/` and runs on the computer that is connected to the printer. It is not part of the web app. Setup, configuration and running it are described in `print-agent/README.md`.
 
@@ -144,6 +166,7 @@ src/
   layouts/     public and admin page frames
   pages/       one component per route
   services/    all reads and writes to Firebase
+functions/     scheduled server-side cleanup for expired print requests
 print-agent/   Python program that saves PDFs or prints approved jobs
   types/       shared data types
   utils/       validation, formatting, status labels

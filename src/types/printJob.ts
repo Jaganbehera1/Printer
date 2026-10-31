@@ -16,10 +16,10 @@ export type DuplexMode = 'SINGLE' | 'DOUBLE';
 
 export interface PrintJob {
   jobId: string;
-  studentName: string;
-  className: string;
-  section: string;
-  rollNumber: string;
+  studentName?: string;
+  className?: string;
+  section?: string;
+  rollNumber?: string;
   fileName: string;
   storagePath: string;
   fileUrl: string;

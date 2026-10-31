@@ -1,12 +1,12 @@
 {
   "rules": {
     "printJobs": {
-      ".indexOn": ["status"],
+      ".indexOn": ["status", "createdAt"],
       ".read": "root.child('adminUsers').child(auth.uid).child('role').val() == 'admin'",
       "$jobId": {
         ".read": true,
         ".write": "!data.exists() || root.child('adminUsers').child(auth.uid).child('role').val() == 'admin'",
-        ".validate": "newData.hasChildren(['jobId', 'studentName', 'className', 'section', 'rollNumber', 'fileName', 'storagePath', 'fileUrl', 'fileSize', 'copies', 'pageSelection', 'printMode', 'duplex', 'status', 'createdAt']) && newData.child('jobId').val() == $jobId && $jobId.length == 16 && $jobId.beginsWith('PR-')",
+        ".validate": "newData.hasChildren(['jobId', 'fileName', 'storagePath', 'fileUrl', 'fileSize', 'copies', 'pageSelection', 'printMode', 'duplex', 'status', 'createdAt']) && newData.child('jobId').val() == $jobId && $jobId.length == 16 && $jobId.beginsWith('PR-')",
         "jobId": { ".validate": "newData.isString()" },
         "studentName": { ".validate": "newData.isString() && newData.val().length >= 2 && newData.val().length <= 80" },
         "className": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 20" },

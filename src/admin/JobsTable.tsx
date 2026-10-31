@@ -41,9 +41,6 @@ export default function JobsTable({ jobs, busyJobId, onView, onAction }: JobsTab
         <thead className="bg-neutral-50 text-xs font-semibold uppercase tracking-wide text-neutral-500">
           <tr>
             <th className="px-4 py-3">Job ID</th>
-            <th className="px-4 py-3">Student</th>
-            <th className="px-4 py-3">Class</th>
-            <th className="px-4 py-3">Roll</th>
             <th className="px-4 py-3">File</th>
             <th className="px-4 py-3 text-center">Copies</th>
             <th className="px-4 py-3">Mode</th>
@@ -58,11 +55,6 @@ export default function JobsTable({ jobs, busyJobId, onView, onAction }: JobsTab
             return (
               <tr key={job.jobId} className="transition-colors hover:bg-neutral-50">
                 <td className="whitespace-nowrap px-4 py-3 font-mono text-xs font-medium text-neutral-900">{job.jobId}</td>
-                <td className="whitespace-nowrap px-4 py-3 text-neutral-900">{job.studentName}</td>
-                <td className="whitespace-nowrap px-4 py-3 text-neutral-700">
-                  {job.className} {job.section}
-                </td>
-                <td className="whitespace-nowrap px-4 py-3 text-neutral-700">{job.rollNumber}</td>
                 <td className="max-w-[180px] truncate px-4 py-3 text-neutral-700" title={job.fileName}>
                   {job.fileName}
                 </td>

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import Alert from '@/components/ui/Alert';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
-import FormField, { TextInput } from '@/components/ui/FormField';
 import FileUploadField from '@/components/print/FileUploadField';
 import PrintOptionsFields from '@/components/print/PrintOptionsFields';
 import PrintSummary from '@/components/print/PrintSummary';
@@ -23,10 +22,6 @@ interface PrintRequestFormProps {
 export default function PrintRequestForm({ settings }: PrintRequestFormProps) {
   const navigate = useNavigate();
   const [values, setValues] = useState<PrintFormValues>(() => ({
-    fullName: '',
-    className: '',
-    section: '',
-    rollNumber: '',
     copies: '1',
     pageMode: 'ALL',
     pageRange: '',
@@ -77,10 +72,6 @@ export default function PrintRequestForm({ settings }: PrintRequestFormProps) {
 
       const job: NewPrintJob = {
         jobId,
-        studentName: values.fullName.trim(),
-        className: values.className.trim(),
-        section: values.section.trim(),
-        rollNumber: values.rollNumber.trim(),
         fileName: file.name,
         storagePath: uploaded.storagePath,
         fileUrl: uploaded.fileUrl,
@@ -110,55 +101,7 @@ export default function PrintRequestForm({ settings }: PrintRequestFormProps) {
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-6">
       <Card>
-        <StepTitle number={1} title="Your details" />
-        <div className="mt-5 grid gap-5 sm:grid-cols-2">
-          <div className="sm:col-span-2">
-            <FormField label="Full name" htmlFor="fullName" error={errors.fullName}>
-              <TextInput
-                id="fullName"
-                autoComplete="name"
-                placeholder="As written in your school records"
-                value={values.fullName}
-                invalid={!!errors.fullName}
-                onChange={(event) => updateValues({ fullName: event.target.value })}
-              />
-            </FormField>
-          </div>
-          <FormField label="Class" htmlFor="className" error={errors.className}>
-            <TextInput
-              id="className"
-              placeholder="e.g. 8"
-              value={values.className}
-              invalid={!!errors.className}
-              onChange={(event) => updateValues({ className: event.target.value })}
-            />
-          </FormField>
-          <FormField label="Section" htmlFor="section" error={errors.section}>
-            <TextInput
-              id="section"
-              placeholder="e.g. B"
-              value={values.section}
-              invalid={!!errors.section}
-              onChange={(event) => updateValues({ section: event.target.value })}
-            />
-          </FormField>
-          <div className="sm:col-span-2">
-            <FormField label="Roll number" htmlFor="rollNumber" error={errors.rollNumber}>
-              <TextInput
-                id="rollNumber"
-                autoComplete="off"
-                placeholder="e.g. 14"
-                value={values.rollNumber}
-                invalid={!!errors.rollNumber}
-                onChange={(event) => updateValues({ rollNumber: event.target.value })}
-              />
-            </FormField>
-          </div>
-        </div>
-      </Card>
-
-      <Card>
-        <StepTitle number={2} title="Your file" />
+        <StepTitle number={1} title="Your file" />
         <div className="mt-5">
           <FileUploadField
             file={file}
@@ -171,7 +114,7 @@ export default function PrintRequestForm({ settings }: PrintRequestFormProps) {
       </Card>
 
       <Card>
-        <StepTitle number={3} title="Print options" />
+        <StepTitle number={2} title="Print options" />
         <div className="mt-5">
           <PrintOptionsFields
             values={values}
@@ -183,7 +126,7 @@ export default function PrintRequestForm({ settings }: PrintRequestFormProps) {
       </Card>
 
       <Card>
-        <StepTitle number={4} title="Summary" />
+        <StepTitle number={3} title="Summary" />
         <div className="mt-5">
           <PrintSummary
             fileName={file?.name ?? null}

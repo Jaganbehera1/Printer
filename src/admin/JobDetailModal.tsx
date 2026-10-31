@@ -30,10 +30,6 @@ export default function JobDetailModal({ job, busy, actionError, onAction, onClo
   const [downloadError, setDownloadError] = useState<string | null>(null);
 
   const details: [string, string][] = [
-    ['Student name', job.studentName],
-    ['Class', job.className],
-    ['Section', job.section],
-    ['Roll number', job.rollNumber],
     ['File name', job.fileName],
     ['File size', formatFileSize(job.fileSize)],
     ['Copies', String(job.copies)],

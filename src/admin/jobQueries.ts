@@ -31,7 +31,7 @@ function matchesDate(job: PrintJob, date: DateFilter, now: number): boolean {
 function matchesSearch(job: PrintJob, search: string): boolean {
   const term = search.trim().toLowerCase();
   if (!term) return true;
-  return [job.jobId, job.studentName, job.rollNumber, job.className, job.fileName]
+  return [job.jobId, job.fileName]
     .some((field) => field.toLowerCase().includes(term));
 }
 
