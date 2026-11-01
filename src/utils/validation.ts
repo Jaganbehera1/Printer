@@ -4,7 +4,7 @@ import { resolvePageSelection } from '@/utils/pageRange';
 
 export interface PrintFormValues {
   copies: string;
-  pageMode: 'ALL' | 'CUSTOM';
+  pageMode: 'ALL' | 'CURRENT' | 'CUSTOM';
   pageRange: string;
   printMode: PrintMode;
   duplex: DuplexMode;
@@ -13,7 +13,7 @@ export interface PrintFormValues {
 
 export type PrintFormErrors = Partial<Record<keyof PrintFormValues | 'file', string>>;
 
-export function validatePrintForm(values: PrintFormValues, settings: PrintSettings): PrintFormErrors {
+export function validatePrintForm(values: PrintFormValues, settings: PrintSettings, currentPage: number): PrintFormErrors {
   const errors: PrintFormErrors = {};
 
   const copies = Number(values.copies);
@@ -21,7 +21,12 @@ export function validatePrintForm(values: PrintFormValues, settings: PrintSettin
     errors.copies = `Enter a number of copies from 1 to ${settings.maxCopies}.`;
   }
 
-  const pages = resolvePageSelection(values.pageMode, values.pageRange);
+  const pages =
+    values.pageMode === 'CURRENT'
+      ? currentPage > 0
+        ? { ok: true as const, value: String(currentPage) }
+        : { ok: false as const, error: 'Load a PDF preview before choosing the current page.' }
+      : resolvePageSelection(values.pageMode, values.pageRange);
   if (!pages.ok) errors.pageRange = pages.error;
 
   return errors;

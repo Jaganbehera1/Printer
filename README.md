@@ -127,7 +127,7 @@ firebase deploy --only hosting
 
 ### Option B: Netlify or Vercel
 
-Build command: `npm run build`. Publish directory: `dist`. Add all `VITE_FIREBASE_*` and `VITE_CLOUDINARY_*` variables in the site settings. Add a single-page-app rewrite rule that sends all paths to `/index.html`.
+Build command: `npm run build`. Publish directory: `dist`. Add all `VITE_FIREBASE_*` and `VITE_CLOUDINARY_*` variables in the site settings. On Vercel, `vercel.json` rewrites the app's client-side routes to `/index.html`; API paths and static assets are not rewritten.
 
 After deploying, add your site's domain under *Authentication > Settings > Authorized domains* in Firebase.
 
@@ -138,6 +138,8 @@ Sign in as an administrator, open **Settings**, and click **Download QR Code**. 
 ## 11. Using the system
 
 **Students and teachers**: scan the QR code, upload a file, choose copies, pages (for example `1-5`, `2,4,6` or `1-3,7,9`), colour mode and sides, then submit. No personal details are required. Word, Excel and PowerPoint files are converted to PDF by the print agent before printing, so the printer computer needs LibreOffice installed. Keep the job ID from the confirmation page to check the status later at `/status/PR-...`.
+
+PDF files can be previewed in the browser, including page navigation and zoom. Printer selection and paper size remain controlled by the printer computer; the current web-to-agent job format does not accept those settings.
 
 **Administrators**: open the dashboard or **Print Jobs**. Use the status pills, search, date range and sort to find requests. Use the icon buttons in each row or the **View** button to open a job, download its PDF, and approve, reject, cancel or retry it.
 

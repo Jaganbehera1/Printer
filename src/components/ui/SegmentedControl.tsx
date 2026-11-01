@@ -2,6 +2,7 @@ export interface SegmentOption<T extends string> {
   value: T;
   label: string;
   description?: string;
+  disabled?: boolean;
 }
 
 interface SegmentedControlProps<T extends string> {
@@ -19,7 +20,9 @@ export default function SegmentedControl<T extends string>({ name, options, valu
         return (
           <label
             key={option.value}
-            className={`flex min-h-[3.75rem] cursor-pointer flex-col justify-center rounded-xl border-2 px-4 py-3 transition-all duration-150 active:scale-[0.99] ${
+            className={`flex min-h-[3.75rem] flex-col justify-center rounded-xl border-2 px-4 py-3 transition-all duration-150 ${
+              option.disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer active:scale-[0.99]'
+            } ${
               active
                 ? 'border-accent-500 bg-accent-50 text-primary-900 shadow-sm shadow-accent-500/10'
                 : 'border-neutral-200 bg-white text-neutral-800 hover:border-primary-300 hover:bg-primary-50/50'
@@ -30,6 +33,7 @@ export default function SegmentedControl<T extends string>({ name, options, valu
               name={name}
               value={option.value}
               checked={active}
+              disabled={option.disabled}
               onChange={() => onChange(option.value)}
               className="sr-only"
             />

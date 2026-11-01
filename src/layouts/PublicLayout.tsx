@@ -1,9 +1,11 @@
 import { ArrowRight, ExternalLink, Menu, Search, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import { BRAND_NAME, BRAND_WEBSITE } from '@/utils/constants';
 
 export default function PublicLayout() {
+  const { pathname } = useLocation();
+  const isPrintPage = pathname === '/print';
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -23,7 +25,7 @@ export default function PublicLayout() {
 
   return (
     <div className="flex min-h-screen flex-col bg-neutral-50">
-      <header className="sticky top-0 z-30 border-b border-neutral-200/80 bg-white/95 shadow-[0_8px_24px_-20px_rgba(11,31,58,0.35)] backdrop-blur-xl">
+      {!isPrintPage && <header className="sticky top-0 z-30 border-b border-neutral-200/80 bg-white/95 shadow-[0_8px_24px_-20px_rgba(11,31,58,0.35)] backdrop-blur-xl">
         <div className="relative mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-3 px-4 sm:h-[5rem] sm:px-6 lg:px-8">
           <Link to="/" aria-label={`${BRAND_NAME} home`} className="flex min-w-0 items-center gap-2.5 sm:gap-3" onClick={closeMenu}>
             <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-primary-900 shadow-md shadow-primary-900/15 ring-1 ring-neutral-200">
@@ -107,13 +109,13 @@ export default function PublicLayout() {
           </nav>
         </div>
         <div className="brand-stripe absolute inset-x-0 bottom-0 h-1" aria-hidden="true" />
-      </header>
+      </header>}
 
-      <main className="page-enter flex-1">
+      <main className={`${isPrintPage ? '' : 'page-enter'} flex-1`}>
         <Outlet />
       </main>
 
-      <footer className="mt-10 border-t border-neutral-200/80 bg-white/70">
+      {!isPrintPage && <footer className="mt-10 border-t border-neutral-200/80 bg-white/70">
         <div className="mx-auto max-w-6xl px-4 py-6 text-center text-xs font-medium text-neutral-500 sm:px-6">
           <div className="flex flex-col items-center justify-between gap-3 sm:flex-row sm:gap-4">
             <div className="flex items-center gap-3">
@@ -125,7 +127,7 @@ export default function PublicLayout() {
             </a>
           </div>
         </div>
-      </footer>
+      </footer>}
     </div>
   );
 }

@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/print", "destination": "/index.html" },
+    { "source": "/success/:jobId", "destination": "/index.html" },
+    { "source": "/status/:jobId", "destination": "/index.html" },
+    { "source": "/admin", "destination": "/index.html" },
+    { "source": "/admin/:path*", "destination": "/index.html" }
+  ]
+}

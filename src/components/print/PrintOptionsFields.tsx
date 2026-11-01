@@ -7,13 +7,15 @@ interface PrintOptionsFieldsProps {
   values: PrintFormValues;
   errors: PrintFormErrors;
   maxCopies: number;
+  currentPage: number;
+  hasPdfPreview: boolean;
   onChange: (patch: Partial<PrintFormValues>) => void;
 }
 
 const stepButton =
   'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-white text-primary-700 shadow-sm transition-all hover:border-primary-300 hover:bg-primary-50 active:scale-95 disabled:opacity-40';
 
-export default function PrintOptionsFields({ values, errors, maxCopies, onChange }: PrintOptionsFieldsProps) {
+export default function PrintOptionsFields({ values, errors, maxCopies, currentPage, hasPdfPreview, onChange }: PrintOptionsFieldsProps) {
   const copies = Number(values.copies) || 1;
 
   const setCopies = (next: number) => {
@@ -52,6 +54,7 @@ export default function PrintOptionsFields({ values, errors, maxCopies, onChange
           onChange={(pageMode) => onChange({ pageMode })}
           options={[
             { value: 'ALL', label: 'All pages' },
+            { value: 'CURRENT', label: 'Current page', description: hasPdfPreview ? `Page ${currentPage}` : 'Available for PDF files', disabled: !hasPdfPreview },
             { value: 'CUSTOM', label: 'Custom range', description: 'For example 1-5, 7' },
           ]}
         />
