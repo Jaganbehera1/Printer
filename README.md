@@ -14,6 +14,8 @@ Users scan a QR code, open the print portal on their phone, upload a file (PDF, 
 
 Create a Cloudinary account and an **unsigned upload preset**. Limit the preset to the file types supported by the print form and a maximum file size of 50 MB; disable overwriting existing assets if that option is available. Uploads use the `raw` resource type.
 
+Uploads are placed in the Cloudinary `Astaranga_printer` asset folder. In Cloudinary's dynamic folder mode, the public ID path alone does not determine the Media Library folder; the app sends `asset_folder` explicitly. If the upload preset specifies a folder, set it to `Astaranga_printer` as well.
+
 **Unsigned Cloudinary uploads are public:** anyone who obtains a file URL can download that document. The app stores the URL in the Firebase job record, which is readable by anyone who knows the job ID.
 
 ## 3. Configure environment variables
